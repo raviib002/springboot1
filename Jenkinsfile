@@ -1,5 +1,9 @@
-def props = readProperties file: "jenkinsfile.properties"
-
+podTemplate {
+  node(POD_LABEL) {
+    checkout scm
+    props = readProperties file: 'jenkins.properties'
+  }
+}
 pipeline {
 	agent any
         	tools {
