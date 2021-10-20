@@ -12,7 +12,7 @@ pipeline {
                     env['NexusRelRepo'] = props['NexusRelRepo']
                     env['artifactId'] = props['artifactId']
                     env['classifier'] = props['classifier']
-                    env['file'] = props['file']
+                    env['filepath'] = props['filepath']
                     env['type'] = props['type']
                     env['NexusCredentialsId'] = props['NexusCredentialsId']
                     env['groupId'] = props['groupId']
@@ -31,8 +31,8 @@ pipeline {
 		}
 		stage('Artifact Stage') {
 		steps {
-		nexusArtifactUploader artifacts: [[artifactId: "$artifactId", classifier: "$classifier", file: "$file", type: "$type"]], credentialsId: "$NexusCredentialsId", groupId: "$groupId", nexusUrl: "$NexusURL_Port", nexusVersion: "$nexusVersion", protocol: "$protocol", repository: "$NexusSnaRepo", version: "$SnapVersion"
-		nexusArtifactUploader artifacts: [[artifactId: "$artifactId", classifier: "$classifier", file: "$file", type: "$type"]], credentialsId: "$NexusCredentialsId", groupId: "$groupId", nexusUrl: "$NexusURL_Port", nexusVersion: "$nexusVersion", protocol: "$protocol", repository: "$NexusRelRepo", version: "$RelVersion"
+		nexusArtifactUploader artifacts: [[artifactId: "$artifactId", classifier: "$classifier", file: "$filepath", type: "$type"]], credentialsId: "$NexusCredentialsId", groupId: "$groupId", nexusUrl: "$NexusURL_Port", nexusVersion: "$nexusVersion", protocol: "$protocol", repository: "$NexusSnaRepo", version: "$SnapVersion"
+		nexusArtifactUploader artifacts: [[artifactId: "$artifactId", classifier: "$classifier", file: "$filepath", type: "$type"]], credentialsId: "$NexusCredentialsId", groupId: "$groupId", nexusUrl: "$NexusURL_Port", nexusVersion: "$nexusVersion", protocol: "$protocol", repository: "$NexusRelRepo", version: "$RelVersion"
                 	}
             	}
 
