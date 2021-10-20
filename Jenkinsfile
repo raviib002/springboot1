@@ -4,6 +4,28 @@ pipeline {
         	maven "maven"
     		}
      	stages {
+            stage('Properties file') {
+            steps {
+                script {
+                    def props = readProperties file:'jenkinsfile.properties';
+                    env['GitURL'] = props['GitURL']
+                    env['GitCreds'] = props['GitCreds']
+                    env['NexusURL_Port'] = props['NexusURL_Port']
+                    env['NexusRelRepo'] = props['NexusRelRepo']
+                    env['artifactId'] = props['artifactId']
+                    env['classifier'] = props['classifier']
+                    env['file'] = props['file']
+                    env['type'] = props['type']
+                    env['NexusCredentialsId'] = props['NexusCredentialsId']
+                    env['groupId'] = props['groupId']
+                    env['nexusVersion'] = props['nexusVersion']
+                    env['protocol'] = props['protocol']
+                    env['NexusSnaRepo'] = props['NexusSnaRepo']
+                    env['SnapVersion'] = props['SnapVersion']
+                    env['RelVersion'] = props['RelVersion']
+                    }                
+                }
+            }
 		stage("Build stage") {
 		steps {
 			sh "mvn clean install package"
@@ -11,8 +33,8 @@ pipeline {
 		}
 		stage('Artifact Stage') {
 		steps {
-                	nexusArtifactUploader artifacts: [[artifactId: 'Springboottest-A_ID', classifier: '', file: '/var/lib/jenkins/workspace/enkinsfiletest_springboot_master/target/demo-1.0-SNAPSHOT.jar', type: 'jar']], credentialsId: 'ba1a5ce3-b8ed-43ed-8ed3-b387ee6cffa3', groupId: 'Springboottest-G_ID', nexusUrl: '192.168.221.128:8091', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0-SNAPSHOT'
-                	nexusArtifactUploader artifacts: [[artifactId: 'Springboottest-A_ID', classifier: '', file: '/var/lib/jenkins/workspace/enkinsfiletest_springboot_master/target/demo-1.0-SNAPSHOT.jar', type: 'jar']], credentialsId: 'ba1a5ce3-b8ed-43ed-8ed3-b387ee6cffa3', groupId: 'Springboottest-G_ID', nexusUrl: '192.168.221.128:8091', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-releases', version: '2.2.3.RELEASE'
+		nexusArtifactUploader artifacts: [[artifactId: "$artifactId", classifier: "$classifier", file: "$file", type: "$type"]], credentialsId: "$NexusCredentialsId", groupId: "$groupId", nexusUrl: "$NexusURL_Port", nexusVersion: "$nexusVersion", protocol: "$protocol", repository: "$NexusSnaRepo", version: "$SnapVersion"
+		nexusArtifactUploader artifacts: [[artifactId: "$artifactId", classifier: "$classifier", file: "$file", type: "$type"]], credentialsId: "$NexusCredentialsId", groupId: "$groupId", nexusUrl: "$NexusURL_Port", nexusVersion: "$nexusVersion", protocol: "$protocol", repository: "$NexusRelRepo", version: "$RelVersion"
                 	}
             	}
 
