@@ -8,7 +8,9 @@ pipeline {
             steps {
                 script {
                     def props = readProperties file:'jenkinsfile.properties';
-                    env['NexusURL_Port'] = props['NexusURL_Port']
+                    env['GitURL'] = props['GitURL']
+		    env['GitCreds'] = props['GitCreds']
+		    env['NexusURL_Port'] = props['NexusURL_Port']
                     env['NexusRelRepo'] = props['NexusRelRepo']
                     env['artifactId'] = props['artifactId']
                     env['classifier'] = props['classifier']
