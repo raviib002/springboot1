@@ -1,4 +1,4 @@
-def props = readProperties file: "/jenkinsfile.properties"
+def props = readProperties file: "jenkinsfile.properties"
 
 pipeline {
 	agent any
