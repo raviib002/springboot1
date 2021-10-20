@@ -1,13 +1,7 @@
-podTemplate {
-  node(POD_LABEL) {
-    checkout scm
-    props = readProperties file: 'jenkins.properties'
-  }
-}
 pipeline {
 	agent any
         	tools {
-        	maven "$MavenName"
+        	maven "maven"
     		}
      	stages {
 		stage("Build stage") {
