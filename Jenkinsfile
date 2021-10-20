@@ -31,8 +31,8 @@ pipeline {
 		}
 		stage('Artifact Stage') {
 		steps {
-		nexusArtifactUploader artifacts: [[artifactId: "$artifactId", classifier: "$classifier", file: "/var/lib/jenkins/workspace/testspringbootjenkinsfile_master/target/demo-1.0-SNAPSHOT.jar", type: "$type"]], credentialsId: "$NexusCredentialsId", groupId: "$groupId", nexusUrl: "$NexusURL_Port", nexusVersion: "$nexusVersion", protocol: "$protocol", repository: "$NexusSnaRepo", version: "$SnapVersion"
-		nexusArtifactUploader artifacts: [[artifactId: "$artifactId", classifier: "$classifier", file: "/var/lib/jenkins/workspace/testspringbootjenkinsfile_master/target/demo-1.0-SNAPSHOT.jar", type: "$type"]], credentialsId: "$NexusCredentialsId", groupId: "$groupId", nexusUrl: "$NexusURL_Port", nexusVersion: "$nexusVersion", protocol: "$protocol", repository: "$NexusRelRepo", version: "$RelVersion"
+		nexusArtifactUploader artifacts: [[artifactId: "$artifactId", classifier: "$classifier", file: "/var/lib/jenkins/workspace/$JOB_NAME/target/demo-1.0-SNAPSHOT.jar", type: "$type"]], credentialsId: "$NexusCredentialsId", groupId: "$groupId", nexusUrl: "$NexusURL_Port", nexusVersion: "$nexusVersion", protocol: "$protocol", repository: "$NexusSnaRepo", version: "$SnapVersion"
+		nexusArtifactUploader artifacts: [[artifactId: "$artifactId", classifier: "$classifier", file: "/var/lib/jenkins/workspace/$JOB_NAME/target/demo-1.0-SNAPSHOT.jar", type: "$type"]], credentialsId: "$NexusCredentialsId", groupId: "$groupId", nexusUrl: "$NexusURL_Port", nexusVersion: "$nexusVersion", protocol: "$protocol", repository: "$NexusRelRepo", version: "$RelVersion"
                 	}
             	}
 
