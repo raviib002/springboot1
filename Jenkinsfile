@@ -1,7 +1,9 @@
+def props = readProperties file: "/jenkinsfile.properties"
+
 pipeline {
 	agent any
         	tools {
-        	maven "maven"
+        	maven "$MavenName"
     		}
      	stages {
 		stage("Build stage") {
